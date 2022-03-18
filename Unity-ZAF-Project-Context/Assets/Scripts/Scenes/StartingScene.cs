@@ -6,6 +6,7 @@ public class StartingScene : MonoBehaviour
 {
     public GameObject MainCam;
     public GameObject ChoiceCam;
+    private Dia1 dia1;
 
     public bool ScriptEnabled = false;
 
@@ -13,7 +14,7 @@ public class StartingScene : MonoBehaviour
 
     void Start()
     {
-
+        dia1 = FindObjectOfType<Dia1>();
     }
 
     void Update()
@@ -25,7 +26,11 @@ public class StartingScene : MonoBehaviour
 
         if (Timer <= 0f)
         {
-            MainCam.transform.position = ChoiceCam.transform.position;
+            if (ScriptEnabled == true)
+            {
+                MainCam.transform.position = ChoiceCam.transform.position;
+                dia1.Main();
+            }
             ScriptEnabled = false;
         }
     }

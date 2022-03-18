@@ -11,15 +11,37 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public Button hostButton;
     public Button joinButton;
 
-    public Button GotoScene01Button;
+    public GameObject gameAlreadyStarted;
+    public GameObject gameAlreadyHosted;
+    public GameObject loading;
+
+    float hostTimer = 3f;
+    bool startHostTimer = false;
 
     private void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
     }
 
+    private void Update()
+    {
+        //Timer Update
+        if (startHostTimer == true && hostTimer >= 0f)
+        {
+            hostTimer -= Time.deltaTime;
+        }
+
+        if (hostTimer <= 0f)
+        {
+            loading.SetActive(false);
+            gameAlreadyHosted.SetActive(true);
+        }
+    }
+
     public void CreateRoom()
     {
+        startHostTimer = true;
+        loading.SetActive(true);
         PhotonNetwork.CreateRoom("ZAFRoom");
     }
 
@@ -30,6 +52,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("MainScene");
+        PhotonNetwork.LoadLevel("HostLobby");
     }
 }
