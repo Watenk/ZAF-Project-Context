@@ -9,7 +9,7 @@ public class SwitchDia : MonoBehaviour
     public List<AudioSource> AudioClips;
     public List<Slider> Sliders;
     bool startTimer = false;
-    float timerAmount = 50f;
+    float timerAmount = 55f;
     public Camera cam;
     private int diaCounter = 0;
 
@@ -32,7 +32,7 @@ public class SwitchDia : MonoBehaviour
         AudioClips[diaCounter - 1].Stop();
         AudioClips[diaCounter].Play();
         startTimer = true;
-        timerAmount = 50f;
+        timerAmount = 55f;
     }
 
     private void Update()
