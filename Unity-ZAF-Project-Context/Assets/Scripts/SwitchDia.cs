@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SwitchDia : MonoBehaviour
 {
     public List<GameObject> CamLocations;
     public List<AudioSource> AudioClips;
+    public List<Slider> Sliders;
+    bool startTimer = false;
+    float timerAmount = 50f;
     public Camera cam;
     private int diaCounter = 0;
 
@@ -27,5 +31,22 @@ public class SwitchDia : MonoBehaviour
         cam.transform.parent = CamLocations[diaCounter].transform;
         AudioClips[diaCounter - 1].Stop();
         AudioClips[diaCounter].Play();
+        startTimer = true;
+        timerAmount = 50f;
+    }
+
+    private void Update()
+    {
+        if (startTimer == true)
+        {
+            timerAmount -= Time.deltaTime;
+        }
+
+        if (timerAmount <= 0f)
+        {
+            startTimer = false;
+        }
+
+        Sliders[diaCounter - 1].value = timerAmount;
     }
 }
